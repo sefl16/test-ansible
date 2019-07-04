@@ -1,4 +1,5 @@
 [test-group]
+ms00 ansible_host=10.61.120.73 ansible_user=umi
 master00 ansible_host=10.61.120.74 ansible_user=umi
 master01 ansible_host=10.61.120.75 ansible_user=umi
 master02 ansible_host=10.61.120.68 ansible_user=umi

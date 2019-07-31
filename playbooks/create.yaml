@@ -1,0 +1,8 @@
+---
+- hosts: all
+  become: true
+  tasks:
+  - name: Create directory
+    file: path=/home/umi/testFolder state=directory mode=775 owner=umi group=umi
+  - name: Create a file within the directory
+    file: path=/home/umi/testFolder/testFile.txt state=touch

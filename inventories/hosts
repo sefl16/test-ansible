@@ -1,0 +1,11 @@
+[ms]
+ms00 ansible_host=10.61.120.73 ansible_user=umi
+
+[k8s_master]
+master00 ansible_host=10.61.120.74 ansible_user=umi
+master01 ansible_host=10.61.120.75 ansible_user=umi
+master02 ansible_host=10.61.120.68 ansible_user=umi
+
+[k8s_workers]
+node00 ansible_host=10.61.120.69 ansible_user=umi
+node01 ansible_host=10.61.120.76 ansible_user=umi

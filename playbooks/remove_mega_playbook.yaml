@@ -1,0 +1,36 @@
+---
+
+  - hosts: all
+    tasks:
+
+    - name: Stop docker service
+      become: yes
+      service:
+        name: docker
+        state: stopped
+        enabled: no
+
+    - name: Docker | Remove softlink for docker-runc
+      become: yes
+      file:
+        path: /usr/libexec/docker/docker-runc-current
+        owner: root
+        group: docker
+        state: absent
+
+    - name: Docker | Remove docker group
+      become: yes
+      group:
+        name: docker
+        state: absent
+
+    - name: Docker | yum uninstall Docker
+      become: yes
+      yum:
+        name: docker
+        state: absent
+
+    - name: Delete the all test files
+      file:
+        path: /home/umi/test_folder
+        state: absent

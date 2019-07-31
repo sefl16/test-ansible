@@ -1,0 +1,56 @@
+---
+  - hosts: all
+    vars:
+    tasks:
+    - name: Create a file with text
+      file:
+        path: /home/umi/test_file_all.txt
+        state: touch
+
+    - name: Add text to test_file_all.text
+      lineinfile:
+        path: /home/umi/test_file_all.txt
+        line: 'This file is created for all k8s from ELX'
+
+    - name: Create a new directory
+      file:
+        path: /home/umi/test_folder
+        state: directory
+        mode: '0755'
+
+  - hosts: k8s_workers
+    tasks:
+    - name: Copy test_file_all.txt to test_folder
+      command: cp /home/umi/test_file_all.txt /home/umi/test_folder
+    - name: Delete the old file (/home/umi/test_file_all.txt)
+      file:
+        state: absent
+        path: /home/umi/test_file_all.txt
+
+  - hosts: k8s_master
+    tasks:
+    - name: Create textfile to k8s_masters
+      file:
+        path: /home/umi/test_folder/test_file.txt
+        state: touch
+        content: |
+
+    - name: Add text to test_file_all.text
+      lineinfile:
+        path: /home/umi/test_folder/test_file.txt
+        line: 'This file is created for all k8s_masters from ELX'
+
+    - name: Delete the old file (/home/umi/test_file_all.txt)
+      file:
+        state: absent
+        path: /home/umi/test_file_all.txt
+
+  - hosts: ms00
+    tasks:
+
+    - name: Where am I?
+      shell: pwd
+
+    - name: Start install docker playbook
+      shell: cd /opt/ewp/tools/mgmtsrv/ && ansible-playbook playbooks/prepare_kubespray.yml
+

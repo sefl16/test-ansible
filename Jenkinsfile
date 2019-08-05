@@ -29,7 +29,7 @@ pipeline {
         }
         stage('test_playbook') {
           steps {
-            ansiblePlaybook(playbook: 'playbooks/test_playbook-yaml', colorized: true, inventory: 'inventories/hosts')
+            ansiblePlaybook(playbook: 'playbooks/test_playbook.yaml', colorized: true, inventory: 'inventories/hosts')
           }
         }
       }

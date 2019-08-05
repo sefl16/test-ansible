@@ -9,7 +9,7 @@
 
     - name: Add text to test_file_all.text
       lineinfile:
-        path: /home/umi/test_file_all.txt
+        destfile: /home/umi/test_file_all.txt
         line: 'This file is created for all k8s from ELX'
 
     - name: Create a new directory
@@ -37,7 +37,7 @@
 
     - name: Add text to test_file_all.text
       lineinfile:
-        path: /home/umi/test_folder/test_file.txt
+        destfile: /home/umi/test_folder/test_file.txt
         line: 'This file is created for all k8s_masters from ELX'
 
     - name: Delete the old file (/home/umi/test_file_all.txt)

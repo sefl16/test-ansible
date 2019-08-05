@@ -2,8 +2,17 @@ pipeline {
   agent any
   stages {
     stage('Initialize') {
-      steps {
-        echo 'Hello world!'
+      parallel {
+        stage('Initialize') {
+          steps {
+            echo 'Hello world!'
+          }
+        }
+        stage('pwd') {
+          steps {
+            sh 'pwd'
+          }
+        }
       }
     }
     stage('Playbook') {

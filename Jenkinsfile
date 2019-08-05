@@ -19,12 +19,12 @@ pipeline {
       parallel {
         stage('Playbooks') {
           steps {
-            ansiblePlaybook(playbook: 'playbooks/mega_playbook.yaml', become: true, colorized: true, inventory: 'inventories/hosts')
+            ansiblePlaybook(playbook: 'playbooks/mega_playbook.yaml', colorized: true, inventory: 'inventories/hosts')
           }
         }
         stage('remove_playboook') {
           steps {
-            ansiblePlaybook(playbook: 'playbooks/remove_mega_playbook.yaml', become: true, colorized: true, inventory: 'inventories/hosts')
+            ansiblePlaybook(playbook: 'playbooks/remove_mega_playbook.yaml', colorized: true, inventory: 'inventories/hosts')
           }
         }
       }

@@ -1,0 +1,29 @@
+---
+  - hosts: all
+    vars:
+    
+    tasks:
+    - name: Create a file with text
+      file:
+        path: /home/umi/testText2.txt
+        state: touch
+        content: |
+          Vinnie
+          Sebbe
+
+    - name: Create a new directory
+      file:
+        path: /home/umi/testDir
+        state: directory
+        mode: '0755'
+
+  - hosts: k8s_workers
+
+    tasks:
+    - name: copy file to testDir
+      command: cp /home/umi/testText2.txt /home/umi/testDir
+
+    - name: delete old file
+      file:
+        state: absent
+        path: /home/umi/testText2.txt

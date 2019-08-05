@@ -16,8 +16,18 @@ pipeline {
       }
     }
     stage('Playbook') {
-      steps {
-        ansiblePlaybook(playbook: 'playbooks/mega_playbook.yaml', colorized: true, inventory: 'inventories/hosts')
+      parallel {
+        stage('Playbooks') {
+          steps {
+            ansiblePlaybook(playbook: 'playbooks/mega_playbook.yaml', colorized: true, inventory: 'inventories/hosts')
+            echo 'The first playbook have been executed'
+          }
+        }
+        stage('Playbook2') {
+          steps {
+            ansiblePlaybook(playbook: 'playbooks/remove_mega_playbook.yaml', colorized: true, inventory: 'inventories/hosts')
+          }
+        }
       }
     }
   }

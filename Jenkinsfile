@@ -22,11 +22,16 @@ pipeline {
             ansiblePlaybook(playbook: 'playbooks/mega_playbook.yaml', colorized: true, inventory: 'inventories/hosts')
           }
         }
-        stage('remove_playboook') {
+        stage('ansible version') {
           steps {
-            ansiblePlaybook(playbook: 'playbooks/remove_mega_playbook.yaml', colorized: true, inventory: 'inventories/hosts')
+            sh 'ansible --version'
           }
         }
+      }
+    }
+    stage('remove_playbook') {
+      steps {
+        ansiblePlaybook(playbook: 'playbooks/remove_mega_playbook.yaml', colorized: true, inventory: 'inventories/hosts')
       }
     }
   }

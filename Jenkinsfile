@@ -50,7 +50,7 @@ pipeline {
     }
     stage('Test awx') {
       steps {
-        ansibleTower(towerServer: 'awxDemo', jobTemplate: 'megaPlay', jobType: 'Run', inventory: 'test-vm-inventory', credential: 'vm-cred', verbose: true, importTowerLogs: true)
+        ansibleTower(towerServer: 'awxDemo', jobTemplate: 'megaPlay', jobType: 'run', inventory: 'test-vm-inventory', credential: 'vm-cred', verbose: true, importTowerLogs: true)
       }
     }
   }

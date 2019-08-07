@@ -8,7 +8,7 @@ pipeline {
             ansiblePlaybook(playbook: 'playbooks/remove_mega_playbook.yaml', colorized: true, inventory: 'inventories/hosts')
           }
         }
-        stage('') {
+        stage('error') {
           steps {
             echo 'First step started'
           }
@@ -41,11 +41,16 @@ pipeline {
             ansiblePlaybook(playbook: 'playbooks/test_playbook.yaml', colorized: true, inventory: 'inventories/hosts')
           }
         }
-        stage('') {
+        stage('error') {
           steps {
             echo 'Last step started'
           }
         }
+      }
+    }
+    stage('Test awx') {
+      steps {
+        ansibleTower(towerServer: 'awxDemo', jobTemplate: 'megaPlay', jobType: 'Run', inventory: 'test-vm-inventory', credential: 'vm-cred', verbose: true, importTowerLogs: true)
       }
     }
   }
